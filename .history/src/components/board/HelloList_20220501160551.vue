@@ -18,7 +18,7 @@
                   
                </tr>
            </thead>
-           <tbody v-if="!searchKeyword"> 
+           <tbody v-if="!searchKeyword">
               <tr :key="i" v-for="(board, i) in boards"  @click="fnView(board.TITLE)">
                  <td>{{board.USERID}}22</td>
                  <td>{{board.USERNAME}}</td>
@@ -27,11 +27,12 @@
                </tr>
            </tbody>
            <tbody v-else>
-             <tr :key="i" v-for="(board, i) in searchboards"  @click="fnView(board.TITLE)">
-                 <td>{{board.USERID}}33</td>
-                 <td>{{board.USERNAME}}</td>
-                 <td>{{board.TITLE}}</td>
-                 <td>{{board.CONTENT}}</td>
+              <tr>
+                 <td>{{searchid}}</td>
+                 <td>{{searchname}}</td>
+                 <td>{{searchtitle}}</td>
+                 <td>{{searchcontent}}</td>
+
                </tr>
            </tbody>
        </table>

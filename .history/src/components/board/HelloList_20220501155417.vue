@@ -3,7 +3,7 @@
     <div id="board" v-if="$store.state.userid">
        <h2>게시판리스트 아이디가 있습니다</h2>
       <div>
-        <input type="text" v-model="searchKeyword" placeholder="제목검색">
+        <input type="text" name="" id="" v-model="searchKeyword" placeholder="제목검색">
         <button @click="fnsearch()">검색</button>
       </div>
       <button @click="fnWrite($store.state.userid)">write</button> 
@@ -18,20 +18,21 @@
                   
                </tr>
            </thead>
-           <tbody v-if="!searchKeyword"> 
+           <tbody v-if="!searchKeyword">
               <tr :key="i" v-for="(board, i) in boards"  @click="fnView(board.TITLE)">
-                 <td>{{board.USERID}}22</td>
+                 <td>{{board.USERID}}</td>
                  <td>{{board.USERNAME}}</td>
                  <td>{{board.TITLE}}</td>
                  <td>{{board.CONTENT}}</td>
                </tr>
            </tbody>
            <tbody v-else>
-             <tr :key="i" v-for="(board, i) in searchboards"  @click="fnView(board.TITLE)">
-                 <td>{{board.USERID}}33</td>
-                 <td>{{board.USERNAME}}</td>
-                 <td>{{board.TITLE}}</td>
-                 <td>{{board.CONTENT}}</td>
+              <tr>
+                 <td>{{searchid}}</td>
+                 <td>{{searchname}}</td>
+                 <td>{{searchtitle}}</td>
+                 <td>{{searchcontent}}</td>
+
                </tr>
            </tbody>
        </table>

@@ -3,7 +3,7 @@
     <div id="board" v-if="$store.state.userid">
        <h2>게시판리스트 아이디가 있습니다</h2>
       <div>
-        <input type="text" v-model="searchKeyword" placeholder="제목검색">
+        <input type="text" name="" id="" v-model="searchKeyword">
         <button @click="fnsearch()">검색</button>
       </div>
       <button @click="fnWrite($store.state.userid)">write</button> 
@@ -18,20 +18,12 @@
                   
                </tr>
            </thead>
-           <tbody v-if="!searchKeyword"> 
+           <tbody>
               <tr :key="i" v-for="(board, i) in boards"  @click="fnView(board.TITLE)">
-                 <td>{{board.USERID}}22</td>
-                 <td>{{board.USERNAME}}</td>
-                 <td>{{board.TITLE}}</td>
-                 <td>{{board.CONTENT}}</td>
-               </tr>
-           </tbody>
-           <tbody v-else>
-             <tr :key="i" v-for="(board, i) in searchboards"  @click="fnView(board.TITLE)">
-                 <td>{{board.USERID}}33</td>
-                 <td>{{board.USERNAME}}</td>
-                 <td>{{board.TITLE}}</td>
-                 <td>{{board.CONTENT}}</td>
+                <td>{{board.USERID}}</td>
+                <td>{{board.USERNAME}}</td>
+                   <td>{{board.TITLE}}</td>
+                   <td>{{board.CONTENT}}</td>
                </tr>
            </tbody>
        </table>
@@ -48,14 +40,10 @@
 export default {
      data() {
     return {
-          boards: '',
-          searchboards :'' ,
+          boards: [],
+          searchboards : [],
           userid : '',
-          searchKeyword : '',
-          searchname : '',
-          searchid : '',
-          searchtitle : '',
-          searchcontent : '',
+          searchKeyword : ''
        }
     },
   created(){
@@ -98,7 +86,7 @@ export default {
     },
     fnsearch(){
       alert("!!!!");
-       this.$http.post('http://localhost:8080/testSearch',{title :this.searchKeyword},{
+       this.$http.post('http://localhost:8080/testSearch',{content :this.searchKeyword},{
             method : 'POST',
             body : JSON.stringify({searchKeyword : this.searchKeyword}),
            headers : {
@@ -108,13 +96,8 @@ export default {
         }).then(response => {
           return response;
       }).then(response => {
-        this.searchboards = response.data.list;
-        this.searchname = response.data.list.USERNAME;
-          this.searchid = response.data.list.USERID;
-            this.searchtitle = response.data.list.TITLE;
-              this.searchcontent = response.data.list.CONTENT;
-         console.log("serach" + JSON.stringify(response.data.list.USERID));
-         console.log("searchboards" + JSON.stringify(this.searchboards));
+        this.boards = response.data.list;
+         console.log("rs" + JSON.stringify(response));
       })
     },
      fnWrite(){

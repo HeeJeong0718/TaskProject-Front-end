@@ -18,20 +18,20 @@
                   
                </tr>
            </thead>
-           <tbody v-if="!searchKeyword"> 
+           <tbody v-if="!searchKeyword">
               <tr :key="i" v-for="(board, i) in boards"  @click="fnView(board.TITLE)">
-                 <td>{{board.USERID}}22</td>
+                 <td>{{board.USERID}}</td>
                  <td>{{board.USERNAME}}</td>
                  <td>{{board.TITLE}}</td>
                  <td>{{board.CONTENT}}</td>
                </tr>
            </tbody>
            <tbody v-else>
-             <tr :key="i" v-for="(board, i) in searchboards"  @click="fnView(board.TITLE)">
-                 <td>{{board.USERID}}33</td>
-                 <td>{{board.USERNAME}}</td>
-                 <td>{{board.TITLE}}</td>
-                 <td>{{board.CONTENT}}</td>
+               <tr :key="i" v-for="(searchKeyword, i) in searchKeyword">
+                 <td>{{searchKeyword.USERID}}</td>
+                 <td>{{searchKeyword.USERNAME}}</td>
+                 <td>{{searchKeyword.TITLE}}</td>
+                 <td>{{searchKeyword.CONTENT}}</td>
                </tr>
            </tbody>
        </table>
@@ -51,7 +51,7 @@ export default {
           boards: '',
           searchboards :'' ,
           userid : '',
-          searchKeyword : '',
+          searchKeyword : [],
           searchname : '',
           searchid : '',
           searchtitle : '',

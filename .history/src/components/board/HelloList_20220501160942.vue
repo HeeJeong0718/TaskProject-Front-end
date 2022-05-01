@@ -18,7 +18,7 @@
                   
                </tr>
            </thead>
-           <tbody v-if="!searchKeyword"> 
+           <tbody v-if="!searchKeyword">
               <tr :key="i" v-for="(board, i) in boards"  @click="fnView(board.TITLE)">
                  <td>{{board.USERID}}22</td>
                  <td>{{board.USERNAME}}</td>

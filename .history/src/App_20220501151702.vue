@@ -3,14 +3,19 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <HelloHeader/>
     </nav>
     <router-view/>
   </div>
 </template>
 <script>
-export default {
+import HelloHeader from '@/components/boards/HelloHeader.vue';
 
-}
+export default defineComponent({
+ comments:{
+  HelloHeader
+ }
+})
 </script>
 
 <style>
