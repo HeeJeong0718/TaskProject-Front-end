@@ -41,10 +41,6 @@ export default new Vuex.Store({
     setSession(state , userid){
       //state.token = n.token
       state.userid = userid
-    },
-    logoutSession(state){
-      sessionStorage.clear()
-      state.userid =''
     }
   },
   actions: {
@@ -61,9 +57,6 @@ export default new Vuex.Store({
         const data = JSON.parse(session)
         context.commit('setSession', data)
       }
-    },
-    logoutSession(context){
-      context.commit('logoutSession')
     }
   },
   modules: {

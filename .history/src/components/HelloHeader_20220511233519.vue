@@ -41,7 +41,7 @@ export default {
 	methods:{
 		logoutUser(){
 			alert("로그아웃합니다");
-            this.$store.commit('logoutSession');
+		     this.$store.commit('logoutSession');
 			//this.$store.commit('clearUser');
 			//현재주소와 이동할 주소를 비교해서 실행
 			if(this.$route.path!=='/') this.$router.push('/')

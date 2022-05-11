@@ -37,23 +37,16 @@
 </template>
 
 <script>
-import { mapActions, mapGetters  } from "vuex";
 export default {
     data(){
         return{
             userid : '', 
             username : '',
             userpass : '',
-            joindate  : '',
-            token :''
+            joindate  : ''
         }
     },
-    computed:{
-       ...mapGetters(['getToken', 'getUserId' ,'getSession'])
-
-    },
     methods:{
-        ...mapActions(["loginSession", "logoutSession"]),
          loginform :function(){
         if(this.userid == "" || this.userpass==""){
           alert("아이디와 비밀번호를 입력하세요");
@@ -70,17 +63,9 @@ export default {
         }).then(response => {
           return response;
       }).then(response => {
-        this.loginSession(this.userid);
-          console.log("dat" + this.userid);
-          //this.$store.commit('loginSession' , this.userid);
-          this.$store.commit('setSession' , this.userid);
-          //this.$store.commit('getSession' , this.userid);
-          //this.$store.commit('setSession' , this.token);
-          //this.$store.dispatch('delayMin');
+          this.$store.commit('setUserID2' , this.userid);
           alert("로그인 되었습니다");
-          //this.userid = sessionStorage.getItem('session');
-          alert("this.userid" +this.userid);
-          this.userid =  this.$store.commit('setSession' , this.userid);
+          this.userid = sessionStorage.getItem("data");
         console.log("rs" + JSON.stringify(response));
         this.$router.push({
             name : 'List'
@@ -91,8 +76,6 @@ export default {
   
     },
     }
-  
-   
 }
 </script>
 

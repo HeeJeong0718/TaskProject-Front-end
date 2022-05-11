@@ -37,7 +37,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters  } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
     data(){
         return{
@@ -50,7 +51,6 @@ export default {
     },
     computed:{
        ...mapGetters(['getToken', 'getUserId' ,'getSession'])
-
     },
     methods:{
         ...mapActions(["loginSession", "logoutSession"]),
@@ -60,7 +60,7 @@ export default {
             this.$refs.userid.focus();
             return;
         }else{
-               this.$http.post('http://localhost:8081/testlogin',{userid :this.userid , userpass : this.userpass },{
+           const {data }   =    this.$http.post('http://localhost:8081/testlogin',{userid :this.userid , userpass : this.userpass },{
             method : 'POST',
             body : JSON.stringify({userid : this.userid}),
            headers : {
@@ -70,17 +70,14 @@ export default {
         }).then(response => {
           return response;
       }).then(response => {
-        this.loginSession(this.userid);
-          console.log("dat" + this.userid);
+         this.loginSession(data);
           //this.$store.commit('loginSession' , this.userid);
-          this.$store.commit('setSession' , this.userid);
-          //this.$store.commit('getSession' , this.userid);
+          this.$store.commit('setSession' , data);
           //this.$store.commit('setSession' , this.token);
           //this.$store.dispatch('delayMin');
           alert("로그인 되었습니다");
-          //this.userid = sessionStorage.getItem('session');
+          this.userid = sessionStorage.getItem(this.state.userid);
           alert("this.userid" +this.userid);
-          this.userid =  this.$store.commit('setSession' , this.userid);
         console.log("rs" + JSON.stringify(response));
         this.$router.push({
             name : 'List'

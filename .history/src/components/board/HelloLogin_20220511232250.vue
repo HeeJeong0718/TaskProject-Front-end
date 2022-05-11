@@ -37,7 +37,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters  } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
     data(){
         return{
@@ -80,7 +81,6 @@ export default {
           alert("로그인 되었습니다");
           //this.userid = sessionStorage.getItem('session');
           alert("this.userid" +this.userid);
-          this.userid =  this.$store.commit('setSession' , this.userid);
         console.log("rs" + JSON.stringify(response));
         this.$router.push({
             name : 'List'

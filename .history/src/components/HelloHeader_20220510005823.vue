@@ -4,7 +4,7 @@
 		<h1><router-link to="/"><img alt="Vue logo" src="../assets/logo.png" width="80"></router-link></h1>
 		<div class="menuWrap">
 			<span>vuex 에서 가져온 username : {{$store.state.userid}}
-			
+			{{$store.sessionStorage.userid}}	
 				</span> 
 			<ul class="menu">
 				<li><router-link to="/board/list">게시판</router-link></li>
@@ -41,8 +41,7 @@ export default {
 	methods:{
 		logoutUser(){
 			alert("로그아웃합니다");
-            this.$store.commit('logoutSession');
-			//this.$store.commit('clearUser');
+			this.$store.commit('clearUser');
 			//현재주소와 이동할 주소를 비교해서 실행
 			if(this.$route.path!=='/') this.$router.push('/')
 			

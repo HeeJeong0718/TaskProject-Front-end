@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  plugins: [createPersistedState("userid")],
   state: {
     //userid로 로그인했을때
     userid : '', 
@@ -41,10 +39,6 @@ export default new Vuex.Store({
     setSession(state , userid){
       //state.token = n.token
       state.userid = userid
-    },
-    logoutSession(state){
-      sessionStorage.clear()
-      state.userid =''
     }
   },
   actions: {
@@ -61,9 +55,6 @@ export default new Vuex.Store({
         const data = JSON.parse(session)
         context.commit('setSession', data)
       }
-    },
-    logoutSession(context){
-      context.commit('logoutSession')
     }
   },
   modules: {

@@ -37,20 +37,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters  } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
     data(){
         return{
             userid : '', 
             username : '',
             userpass : '',
-            joindate  : '',
-            token :''
+            joindate  : ''
         }
     },
     computed:{
-       ...mapGetters(['getToken', 'getUserId' ,'getSession'])
-
+       ...mapGetters(['getToken', 'getUserId'])
     },
     methods:{
         ...mapActions(["loginSession", "logoutSession"]),
@@ -70,17 +69,12 @@ export default {
         }).then(response => {
           return response;
       }).then(response => {
-        this.loginSession(this.userid);
-          console.log("dat" + this.userid);
-          //this.$store.commit('loginSession' , this.userid);
-          this.$store.commit('setSession' , this.userid);
-          //this.$store.commit('getSession' , this.userid);
-          //this.$store.commit('setSession' , this.token);
+          this.$store.commit('loginSession' , this.userid);
+          //this.$store.commit('setUserID2' , this.userid);
           //this.$store.dispatch('delayMin');
           alert("로그인 되었습니다");
-          //this.userid = sessionStorage.getItem('session');
+          this.userid = sessionStorage.getItem("data");
           alert("this.userid" +this.userid);
-          this.userid =  this.$store.commit('setSession' , this.userid);
         console.log("rs" + JSON.stringify(response));
         this.$router.push({
             name : 'List'
@@ -90,9 +84,10 @@ export default {
        //const baseURL = 'http://localhost:8080/testregister';
   
     },
+    },
+    created(){
+      this.getSession();
     }
-  
-   
 }
 </script>
 

@@ -5,7 +5,7 @@
        <span class="mr-2">Home</span>
       </v-btn>
       <v-spacer></v-spacer>
-       <span class="mr-2">  USER: {{$store.state.userid}}</span> 
+       <span class="mr-2"> {{sessionStorage}}	 USER: {{$store.state.userid}}</span> 
         <v-btn depressed color="primary" @click='logoutUser()'>
        <span class="mr-2" >LOGOUT</span>
       </v-btn> 
