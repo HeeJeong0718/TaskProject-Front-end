@@ -1,0 +1,39 @@
+<template>
+  <v-card height="100%">
+      <v-container pa-1>  
+          <v-layout row>
+              <v-flex xs7>
+                  <v-card-title primary-title>
+                      <div>
+                          <div>{{title}}</div>
+                          <div>{{number}}</div>
+                      </div>
+                  </v-card-title>
+              </v-flex>
+              <v-flex xs5>
+                  <v-card-title>
+                      <v-avatar>
+                          <v-icon></v-icon>
+                      </v-avatar>
+                  </v-card-title>
+              </v-flex>
+          </v-layout>
+          <v-divider></v-divider>
+          <v-card-actions class="pa-2">
+              <v-icon></v-icon>
+               <span>{{bText}}</span>
+               <v-spacer></v-spacer>
+          </v-card-actions>
+      </v-container>
+  </v-card>
+</template>
+
+<script>
+export default {
+     props: ['title', 'number', 'bText']
+}
+</script>
+
+<style>
+
+</style>

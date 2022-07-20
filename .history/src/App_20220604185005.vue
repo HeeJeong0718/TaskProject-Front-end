@@ -1,0 +1,26 @@
+<template>
+  <v-app>
+    <HelloAppHeader/>
+    
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+import HelloAppHeader from '@/components/board/HelloAppHeader.vue';
+export default {
+  name: 'App',
+  components:{HelloAppHeader},
+  data: () => ({
+    //
+     drawer: null,
+    items: [
+        { icon: 'lightbulb_outline', text: 'Home', path:"/" },
+        { icon: 'touch_app', text: 'Reminders', path:"about" },
+    ],
+  }),
+
+};
+</script>
