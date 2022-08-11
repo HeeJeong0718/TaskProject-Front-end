@@ -1,0 +1,140 @@
+<template>
+   <v-container>
+       <div style ="margin:30px">
+        <div align="right">
+           <v-btn depressed color="primary" @click='toBack()' >뒤로가기</v-btn>
+            <v-btn depressed color="error"  @click='write()'>작성</v-btn>
+        </div>
+          <div class="mb-3" align="left">
+            <label for="exampleFormControlInput1" class="form-label">UserID</label>
+             <v-text-field type="text" id="exampleFormControlInput1" v-model="$store.state.mem_id" />  
+        </div>
+         <!-- <div class="mb-3" align="left">
+            <label for="exampleFormControlInput1" class="form-label">username</label>
+            <v-text-field type="text" id="exampleFormControlInput1" v-model="username"/>  
+        </div>  -->
+         <div class="mb-3" align="left">
+            <label for="exampleFormControlInput1"     class="form-label">Titel</label>
+             <v-text-field type="text" id="exampleFormControlInput1" v-model="b_title"/>  
+        </div>
+         <div class="mb-3" align="left">
+            <label for="exampleFormControlInput1" class="form-label">CONTENT</label>
+            <v-textarea type="text" id="exampleFormControlInput1" v-model="b_content"/>
+        </div>
+
+          <div class="mb-2" align="left">
+            <label for="exampleFormControlInput1" class="form-label">DUE_DATE</label>
+            
+            <v-col cols="12" sm="6" md="4">
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="due_date"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="due_date"
+                  label="Picker in menu"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="date"
+                no-title
+                scrollable
+              >
+                <v-spacer></v-spacer>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="menu = false"
+                >
+                  Cancel
+                </v-btn>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.menu.save(date)"
+                >
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
+          </v-col>
+
+                  
+          </div> 
+        </div>
+    </v-container>
+</template>
+
+<script>
+
+export default {
+ data(){
+     return{
+           username :'',
+           userid :this.$store.state.userid, //this붙이는거잊지말기
+           b_title :'',
+           b_content :'',
+           
+           menu: false, 
+             due_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+          modifyDetail :{}
+     }
+ },
+
+
+  
+ methods:{
+     toBack(){
+             if(this.$store.state.loginlevel=="1"){
+            this.$router.push({
+            name : 'adminList'
+         
+        })
+        }else{
+           this.$router.push({
+            name : 'List'
+        })
+        }
+     },
+        write:function(){
+        this.$http.post('/boardInsert',{ b_id : this.$store.state.mem_id ,b_title :this.b_title, b_content : this.b_content, due_date : this.due_date}, { //파라미터릂 여기에 줘야함 ->스프링 컨트롤러에 있는 vo랑똑같은이름써저야한다!!!
+            method : 'POST',
+            body : JSON.stringify({}),
+            headers : {
+              'Content-Type' : 'application/json',
+              'Accept' : '*/*'
+           }
+        }).then(response => {
+         console.log("rs1" + JSON.stringify(response));
+         alert("작성되었습니다!!");
+              if(this.$store.state.loginlevel=="1"){
+            this.$router.push({
+            name : 'adminList'
+         
+        })
+        }else{
+           this.$router.push({
+            name : 'List'
+        })
+        }
+      
+         })
+        }
+ },
+ 
+}
+</script>
+
+<style>
+
+</style>

@@ -1,13 +1,13 @@
 <template>
-  <v-app>
-    <v-card  class="mt-10 ml-5 mr-5">
+  <v-app class="container">
+    <v-card  class="hero">
       <v-card-title>
         <h1>LOGIN</h1>
       </v-card-title>
       <v-card-text>
         <v-form>
-          <v-text-field label="Username" ref="userid"  v-model="userid"  prepend-icon="mdi-account-circle"/>
-           <v-text-field label="Password"  ref="userpass" v-model="userpass"  prepend-icon="mdi-lock"  append-icon="mdi-eye-off"/>
+          <v-text-field label="Username" ref="mem_id"  v-model="mem_id"  prepend-icon="mdi-account-circle"/>
+           <v-text-field label="Password"  ref="mem_pwd" v-model="mem_pwd"  prepend-icon="mdi-lock"  append-icon="mdi-eye-off"/>
         </v-form>
         </v-card-text>
         <v-divider></v-divider>
@@ -17,23 +17,8 @@
       
     </v-card>
 
-
   </v-app>
-  <!--<div>
-      <h2>로그인하기</h2>
-      <form>
-         <div>
-             <label for="userid">userId</label>
-             <input type="text" placeholder="userId" ref="userid" v-model="userid" autofocus>
-         </div>
-         <div>
-             <label for="userpass">password</label>
-             <input type="text" placeholder="password" ref="userpass"  v-model="userpass">
-         </div>
-      </form>
-    <v-btn depressed color="primary" @click='loginform()'>login</v-btn>
-  </div>
-  -->
+
 </template>
 
 <script>
@@ -41,11 +26,14 @@ import { mapActions, mapGetters  } from "vuex";
 export default {
     data(){
         return{
-            userid : '', 
-            username : '',
+            mem_id : '', 
+            mem_pwd : '',
             userpass : '',
             joindate  : '',
-            token :''
+            token :'',
+            loginlevel : '',
+            user : '',
+
         }
     },
     computed:{
@@ -55,12 +43,12 @@ export default {
     methods:{
         ...mapActions(["loginSession", "logoutSession"]),
          loginform :function(){
-        if(this.userid == "" || this.userpass==""){
+        if(this.mem_id == "" || this.mem_pwd==""){
           alert("아이디와 비밀번호를 입력하세요");
-            this.$refs.userid.focus();
+            this.$refs.mem_id.focus();
             return;
         }else{
-               this.$http.post('http://localhost:8081/testlogin',{userid :this.userid , userpass : this.userpass },{
+   this.$http.post('http://localhost:8080/login',{mem_id :this.mem_id , mem_pwd : this.mem_pwd ,loginlevel : this.loginlevel , mem_no : this.mem_no  },{
             method : 'POST',
             body : JSON.stringify({userid : this.userid}),
            headers : {
@@ -70,25 +58,30 @@ export default {
         }).then(response => {
           return response;
       }).then(response => {
-        this.loginSession(this.userid);
-          console.log("dat" + this.userid);
-          //this.$store.commit('loginSession' , this.userid);
-          this.$store.commit('setSession' , this.userid);
-          //this.$store.commit('getSession' , this.userid);
-          //this.$store.commit('setSession' , this.token);
-          //this.$store.dispatch('delayMin');
+        this.loginSession(this.mem_id);
+          console.log("dat" + this.mem_id);
+          this.$store.commit('setSession' , this.mem_id);
           alert("로그인 되었습니다");
-          //this.userid = sessionStorage.getItem('session');
-          alert("this.userid" +this.userid);
-          this.userid =  this.$store.commit('setSession' , this.userid);
-        console.log("rs" + JSON.stringify(response));
-        this.$router.push({
-            name : 'List'
+          this.mem_id =  this.$store.commit('setSession' , this.mem_id);
+          console.log("rs" + JSON.stringify(response));
+         this.user = response.data.list.MEM_ID;
+         this.loginlevel = response.data.list.LOGINLEVEL;
+         this.mem_no = response.data.list.MEM_NO;
+         this.$store.commit('setUserLevel' , this.loginlevel);
+         this.$store.commit('setUserNo' , this.mem_no);
+        if(this.$store.state.loginlevel=="1"){
+            this.$router.push({
+            name : 'adminList'
+         
         })
+        }else{
+           this.$router.push({
+            name : 'List'
+            //name : 'main'
+        })
+        }
       })
-     }
-       //const baseURL = 'http://localhost:8080/testregister';
-  
+     }   
     },
     }
   
@@ -97,5 +90,11 @@ export default {
 </script>
 
 <style>
-
+.hero {
+    max-width:400px;
+    margin:40px auto;
+    margin-top:100px;
+    padding: 40px;
+}
+  
 </style>

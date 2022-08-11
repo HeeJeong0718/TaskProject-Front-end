@@ -7,6 +7,14 @@ import HelloDetail from "../components/board/HelloDetail.vue";
 import HelloEdit from "../components/board/HelloEdit.vue";
 import HelloRegister from "../components/board/HelloRegister.vue";
 import HelloLogin from "../components/board/HelloLogin.vue";
+import HelloNotFound from "../components/board/HelloNotFound.vue";
+import HelloAdmin from "../components/board/HelloAdmin.vue";
+import HelloMainPage from "../components/board/HelloMainPage.vue";
+import HelloMyPage from "../components/board/HelloMyPage.vue";
+import HelloDashboard from "../components/board/HelloDashboard.vue";
+import HelloDepartment from "../components/Admin/HelloDepartment.vue";
+import HelloDepartmentDetail from "../components/Admin/HelloDepartmentDetail.vue";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,12 +33,28 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
+    path: "/main",
+    name: "main", //메인페이지
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:HelloMainPage
+  },
+  {
     path: "/board/list",
     name: "List",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component:HelloList
+  },
+  {
+    path: "/board/adminlist",
+    name: "adminList",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:HelloAdmin
   },
   {
     path: "/board/edit",
@@ -63,6 +87,48 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component:HelloDetail
+  },
+  {
+    path: "/board/dashboard" ,
+    name: "dashboard",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:HelloDashboard
+  },
+  {
+    path: "/admin/department" ,
+    name: "department",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:HelloDepartment
+  },
+  {
+    path: "/admin/dep_detail/:contentId" ,
+    name: "department_detail",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:HelloDepartmentDetail
+  },
+  {
+    path: "/board/MyPage/:contentId" ,
+    name: "MyPage",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:HelloMyPage
+  },
+
+
+  {
+    path: "*" ,
+    name: "notfound",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:HelloNotFound
   },
 ];
 

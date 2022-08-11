@@ -1,0 +1,37 @@
+<template>
+  <v-container fluid>
+    <v-row dense >
+        <v-col  cols="12" md="6" sm="4">
+       <v-card height="100%">
+            <v-card-title>
+                <router-link :to="{path:support.link}">{{support.name}}</router-link>
+            </v-card-title>
+        </v-card>
+        </v-col>
+    </v-row>
+    </v-container>
+  <!--<v-card height="100%">
+     <v-toolbar color="orange" flat>
+      <v-toolbar-title>{{title}}</v-toolbar-title>
+      <v-spacer></v-spacer>      
+     </v-toolbar>
+        <v-card-title>
+            <v-avatar>
+                <v-icon medium :color="tIconColor">{{tIcon}}</v-icon>
+            </v-avatar>
+        </v-card-title>
+      
+    
+  </v-card>
+  -->
+</template>
+
+<script>
+export default {
+     props: ['title', 'number', 'bText','tIcon']
+}
+</script>
+
+<style>
+
+</style>
