@@ -39,6 +39,10 @@ export default {
    },
    methods:{
        submit:function(){
+      if(this.dep_id == "" || this.dep_nm == ""){
+        alert("부서아이디와 부서명을 입력해주세요");
+        return;
+      }
         this.$http.post('http://localhost:8080/depInsert',{dep_id : this.dep_id , dep_nm : this.dep_nm }, { //파라미터릂 여기에 줘야함 ->스프링 컨트롤러에 있는 vo랑똑같은이름써저야한다!!!
             method : 'POST',
             body : JSON.stringify({}),

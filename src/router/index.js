@@ -13,6 +13,7 @@ import HelloMainPage from "../components/board/HelloMainPage.vue";
 import HelloMyPage from "../components/board/HelloMyPage.vue";
 import HelloDashboard from "../components/board/HelloDashboard.vue";
 import HelloDepartment from "../components/Admin/HelloDepartment.vue";
+import AdminDashboard from "../components/Admin/AdminDashboard.vue";
 import HelloDepartmentDetail from "../components/Admin/HelloDepartmentDetail.vue";
 
 Vue.use(VueRouter)
@@ -55,6 +56,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component:HelloAdmin
+  },
+  {
+    path: "/admin/AdminDashboard",
+    name: "adminDashboard",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:AdminDashboard
   },
   {
     path: "/board/edit",

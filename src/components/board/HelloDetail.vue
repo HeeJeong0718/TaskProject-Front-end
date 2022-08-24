@@ -7,7 +7,7 @@
         <v-card class="pa-5">
       
           <div class="mt-4" align="left">
-            <v-text-field dense label="B_ROW"v-model="userDetail.b_row"/>
+            <v-text-field dense label="B_ROW"v-model="userDetail.B_ROW"/>
         </div>
         <div class="mt-4" align="left">
           <v-text-field dense label="USERID"v-model="$store.state.mem_id"/>
@@ -126,6 +126,7 @@
 
 
 <script>
+  import axios from "axios";
 export default {
     
      data() {
@@ -156,29 +157,24 @@ export default {
   mounted(){
            console.log("ID::" + JSON.stringify( this.$route.params.contentId));
           const B_ROW = this.$route.params.contentId;
-             
-        //this.$http.post(`${baseURL}`,{
-         this.$http.post('http://localhost:8080/boardDetail' ,{mem_id:this.$store.state.mem_id , b_row:B_ROW},{
-            method : 'POST',
-            body : JSON.stringify({ id : 2}),
-           headers : {
-         'Content-Type' : 'application/json',
-         'Accept' : '*/*'
-           }   
-        }).then(response => {
-           return response
-       }).then(response => {
-       this.userDetail = response.data.list;
-       console.log("title" + JSON.stringify(response.data.list));
-        // console.log("rs" + JSON.stringify(response.data.list));
+      axios.get('http://localhost:8080/boardDetail',{
+          params:{
+             mem_id:this.$store.state.mem_id,
+             mem_no : this.$store.state.mem_no,
+             b_row:B_ROW
+          }
+         })
+      .then(response =>{
+      this.userDetail = response.data.list 
       })
+      .catch(error =>{
+      console.log(error);
+      }) 
     },
     methods:{
-     
        modify:function(){
-          
-            this.$http.post('http://localhost:8080/boardUpdate',{b_no:this.userDetail.B_NO, b_title :this.userDetail.B_TITLE, b_content :this.userDetail.B_CONTENT, due_date : this.userDetail.DUE_DATE, status : this.userDetail.STATUS},{ //해당 userdetial.empno를 가져온다!!
-            method : 'POST',
+            this.$http.put('http://localhost:8080/boardUpdate',{b_no:this.userDetail.B_NO, b_title :this.userDetail.B_TITLE, b_content :this.userDetail.B_CONTENT, due_date : this.userDetail.DUE_DATE, status : this.userDetail.STATUS},{ //해당 userdetial.empno를 가져온다!!
+            method : 'PUT',
             body : JSON.stringify({ title :this.userDetail.TITLE}),
            headers : {
          'Content-Type' : 'application/json',
@@ -203,11 +199,14 @@ export default {
       })
        }
      ,
-          del:function(){
-          
-            this.$http.post('http://localhost:8080/boardDelete',{ b_no :this.userDetail.B_NO},{ //해당 userdetial.empno를 가져온다!!
-            method : 'POST',
-            body : JSON.stringify({ title :this.userDetail.TITLE}),
+     
+     del:function(){
+      alert("!!!");
+        const b_no = this.userDetail.B_NO;
+        alert("bb_no" + b_no);
+         axios.delete('http://localhost:8080/boardDelete/'+`${b_no}`,{ 
+            method : 'DELETE',
+            body : JSON.stringify({ }),
            headers : {
          'Content-Type' : 'application/json',
          'Accept' : '*/*'
@@ -215,7 +214,8 @@ export default {
         }).then(response => {
            return response
        }).then(response => {
-        alert("삭제하시겠습니까?");
+           console.log("rs22" + JSON.stringify(response));
+        alert("수정하시겠습니까?");
           if(this.$store.state.loginlevel=="1"){
             this.$router.push({
             name : 'adminList'
@@ -226,8 +226,7 @@ export default {
             name : 'List'
         })
         }
-        console.log("rs22" + JSON.stringify(response));
-        // console.log("rs" + JSON.stringify(response.data.list));
+         console.log("rs22" + JSON.stringify(response));
       })
        },
       

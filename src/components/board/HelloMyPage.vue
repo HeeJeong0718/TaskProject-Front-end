@@ -28,6 +28,7 @@
  </v-container>
 </template>
 <script>
+import axios from "axios";
 export default {
    data(){
     return {
@@ -68,22 +69,19 @@ export default {
       })
     },
     getDepart :function(){
-      
-      this.$http.post('http://localhost:8080/departlist',{},{
-           method : 'POST',
-           body : JSON.stringify({userid : this.userid}),
-          headers : {
-        'Content-Type' : 'application/json',
-        'Accept' : '*/*'
-          } 
-       }).then(response => {
-         return response;
-     }).then(response => {
-       this.departlist = response.data.list;
-     console.log("response.data.list::" + JSON.stringify(response.data.list));
-    
-     })
-   },
+      axios.get('http://localhost:8080/departlist',{
+        headers : {
+         'Content-Type' : 'application/json',
+         'Accept' : '*/*'
+           }  
+         })
+      .then(response =>{
+      this.departlist = response.data.list;
+      })
+      .catch(error =>{
+      console.log(error);
+      })
+    },
 
 
    modify:function(){

@@ -30,7 +30,7 @@
   </div>
   </template>
 <script>
-  
+import axios from "axios";
 export default {
    data(){
     return {
@@ -43,26 +43,23 @@ export default {
 
    mounted(){
           const DEP_NO = this.$route.params.contentId;
-         this.$http.post('http://localhost:8080/depDetail' ,{dep_no:DEP_NO},{
-            method : 'POST',
-            body : JSON.stringify({ id : 2}),
-           headers : {
-         'Content-Type' : 'application/json',
-         'Accept' : '*/*'
-           }   
-        }).then(response => {
-           return response
-       }).then(response => {
-       this.depart_detail = response.data.list;
-       console.log("title" + JSON.stringify(response.data.list));
-        // console.log("rs" + JSON.stringify(response.data.list));
+      axios.get('http://localhost:8080/depDetail',{
+          params:{
+            dep_no:DEP_NO
+          }
+         })
+      .then(response =>{
+      this.depart_detail = response.data.list 
       })
+      .catch(error =>{
+      console.log(error);
+      }) 
     },
     methods:{
           
       modify:function(){
-          this.$http.post('http://localhost:8080/depUpdate',{dep_no :this.depart_detail.DEP_NO, dep_id :this.depart_detail.DEP_ID, dep_nm :this.depart_detail.DEP_NM},{
-          method : 'POST',
+          this.$http.put('http://localhost:8080/depUpdate',{dep_no :this.depart_detail.DEP_NO, dep_id :this.depart_detail.DEP_ID, dep_nm :this.depart_detail.DEP_NM},{
+          method : 'PUT',
           body : JSON.stringify({}),
          headers : {
        'Content-Type' : 'application/json',
@@ -88,9 +85,10 @@ export default {
      }
    ,
         del:function(){
-        
-          this.$http.post('http://localhost:8080/depDelete',{ dep_no :this.depart_detail.DEP_NO},{ 
-          method : 'POST',
+          const dep_no = this.depart_detail.DEP_NO;
+          alert("dep_no" + dep_no);
+          axios.delete('http://localhost:8080/depDelete/'+`${dep_no}`,{ 
+          method : 'DELETE',
           body : JSON.stringify({}),
          headers : {
        'Content-Type' : 'application/json',
@@ -102,12 +100,8 @@ export default {
       alert("삭제하시겠습니까?");
         if(this.$store.state.loginlevel=="1"){
           this.$router.push({
-          name : 'adminList'
+          name : 'department'
        
-      })
-      }else{
-         this.$router.push({
-          name : 'List'
       })
       }
       console.log("rs22" + JSON.stringify(response));
@@ -119,12 +113,8 @@ export default {
      goback(){
       if(this.$store.state.loginlevel =="1"){
           this.$router.push({
-          name : 'adminList'
+          name : 'department'
        
-      })
-      }else{
-         this.$router.push({
-          name : 'List'
       })
       }
    },

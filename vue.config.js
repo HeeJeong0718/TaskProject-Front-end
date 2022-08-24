@@ -4,5 +4,7 @@ module.exports = defineConfig({
     'vuetify'
   ],
   lintOnSave: false , //esLint끄기 
- 
+  devServer:{
+    proxy: 'http://localhost:8080',
+  }
 })

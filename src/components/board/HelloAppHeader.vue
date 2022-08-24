@@ -5,7 +5,7 @@
      <v-btn text color="grey"  text to="/board/list">
       <span class="font-weight-light">Home</span>
     </v-btn>
-    <span class="pl-3 grey--text">{{today}}</span> 
+    <span class="pl-3 grey--text">{{today}}  {{now}}</span> 
     <v-spacer></v-spacer>
     <v-btn depressed text color="grey" @click='UserList($store.state.mem_id)'>
      <span class="mr-2">  User : {{$store.state.mem_id}} </span> 
@@ -45,14 +45,14 @@
         </v-list-item>
       </v-list>
       </v-navigation-drawer>-->
-    <v-navigation-drawer app v-model="drawer" id="pstyle">
+    <v-navigation-drawer app v-model="drawer" id="pstyle"  v-if="isUserlogin">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="white--text">
-            My Dashboard {{$store.state.mem_id}}
+            My Dashboard
           </v-list-item-title>
           <v-list-item-subtitle class="white--text">
-            현재시간 {{now}}
+            
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -108,14 +108,16 @@ export default {
       today : 'yyyyMMdd',
       drawer : false,
       User:[
-        {icon :'mdi-lock',title2 : '부서',title:'Dashboard', route :'/board/dashboard'},
-        {icon :'mdi-folder',title2 : 'mdi-view-folder' ,title:'새글작성', route :'/board/edit'},
-        { icon :'mdi-view-dashboard', title2 : 'Dashboard', title:'업무일지', route :'/board/list'}
+        {icon :'mdi-view-dashboard',title2 : '부서',title:'Dashboard', route :'/board/dashboard'},
+        {icon :'mdi-pencil',title2 : 'mdi-view-folder' ,title:'업무일지 작성', route :'/board/edit'},
+        { icon :'mdi-folder', title2 : 'Dashboard', title:'업무일지 관리', route :'/board/list'}
       ],
       Admin:[
-          { icon :'mdi-view-dashboard', title2 : 'Dashboard', title:'업무일지2', route :'/board/list'},
-          {icon :'mdi-folder',title2 : 'mdi-view-folder' ,title:'새글작성2', route :'/board/edit'},
-          {icon :'mdi-lock',title2 : '부서',title:'부서2', route :'/admin/department'}
+           { icon :'mdi-view-dashboard', title2 : 'Dashboard', title:'Dashboard', route :'/Admin/AdminDashboard'},
+          { icon :'mdi-folder', title2 : 'Dashboard', title:'업무일지 관리', route :'/board/List'},
+          { icon :'mdi-folder', title2 : 'Dashboard', title:'유저업무 관리', route :'/board/adminlist'},
+          {icon :'mdi-pencil',title2 : 'mdi-view-folder' ,title:'업무일지 작성', route :'/board/edit'},
+          {icon :'mdi-lock',title2 : '부서',title:'부서관리', route :'/admin/department'}
       ]
     }
   },
@@ -155,7 +157,9 @@ export default {
 			this.$store.commit('clearUser');
 			//현재주소와 이동할 주소를 비교해서 실행
 			if(this.$route.path!=='/') this.$router.push('/')
-			
+			this.$router.push({
+        name :'login'
+      })
 			
 		},
     UserList(userid){

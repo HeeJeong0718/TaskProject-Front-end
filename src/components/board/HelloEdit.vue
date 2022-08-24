@@ -49,63 +49,11 @@
           </v-card>
         </v-flex>
       </v-layout>
-     
-      <!-- <div style ="margin:30px">
-        <div align="right">
-           <v-btn depressed color="primary" @click='toBack()' >뒤로가기</v-btn>
-            <v-btn depressed color="error"  @click='write()'>작성</v-btn>
-        </div>
-          <div class="mb-3" align="left">
-            <label for="exampleFormControlInput1" class="form-label">UserID</label>
-             <v-text-field type="text" id="exampleFormControlInput1" v-model="$store.state.mem_id" />  
-        </div>
-          <div class="mb-3" align="left">
-            <label for="exampleFormControlInput1" class="form-label">username</label>
-            <v-text-field type="text" id="exampleFormControlInput1" v-model="username"/>  
-        </div> 
-         <div class="mb-3" align="left">
-            <label for="exampleFormControlInput1"     class="form-label">Titel</label>
-             <v-text-field type="text" id="exampleFormControlInput1" v-model="b_title"/>  
-        </div>
-         <div class="mb-3" align="left">
-            <label for="exampleFormControlInput1" class="form-label">CONTENT</label>
-            <v-textarea type="text" id="exampleFormControlInput1" v-model="b_content"/>
-        </div>
-         <div class="mb-3" align="left">
-         <v-select :items="status"  v-model ="status" label="status" ></v-select>
-
-        </div>
-
-          <v-menu
-                v-model="menu2"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-            >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="due_date"
-              label="due-date"
-              prepend-icon="mdi-calendar"
-              readonly
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-            v-model="due_date"
-            @input="menu2 = false"
-          ></v-date-picker>
-        </v-menu>
-
-    </div> -->
     </v-container>
    </div>
 </template>
-
 <script>
+import axios from "axios";
 
 export default {
  data(){

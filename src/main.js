@@ -14,6 +14,7 @@ var sessionOptions = {
 }
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
+Vue.prototype.$axios = axios
 new Vue({
   router,
   store,

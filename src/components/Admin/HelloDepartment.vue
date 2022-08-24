@@ -14,18 +14,6 @@
           <v-flex>
           <PopUp/>
         </v-flex>
-        
-        <v-dialog v-if="showModal" @close="showModal = false">
-          <PopUp/>
-          <h3 slot="header"></h3>
-          <div slot="body">
-              제목 
-              작성자 
-              내용 
-              <button class="btn btn-info">수정</button>
-          </div>
-        </v-dialog>
-  
   </div>
    </v-container>
 </template>
@@ -33,6 +21,8 @@
 <script>
   
 import PopUp from './PopUp.vue'
+import axios from "axios";
+
 export default {
   
   components:{PopUp},
@@ -70,17 +60,14 @@ export default {
     
      },
     getDepart :function(){
-       this.$http.post('http://localhost:8080/departlist',{},{
-            method : 'POST',
-            body : JSON.stringify({userid : this.userid}),
-           headers : {
-         'Content-Type' : 'application/json',
-         'Accept' : '*/*'
-           } 
-        }).then(response => {
-          return response;
-      }).then(response => {
-        this.department = response.data.list;
+      axios.get('http://localhost:8080/departlist',{
+          
+         })
+      .then(response =>{
+      this.department = response.data.list 
+      })
+      .catch(error =>{
+      console.log(error);
       })
     },
     

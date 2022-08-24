@@ -296,24 +296,33 @@ export default {
 
 </script> 
 <style scoped>
-
-.board.done{
-  border-left : 4px solid #3cd1c2;
-}
-.board.ongoing{
-  border-left : 4px solid orange;
-}
-.board.complete{
-  border-left : 4px solid tomato;
-}
-#chip.done{
-  background :  #3cd1c2;
-}
-
-#chip.ongoing{
-  background :  orange;
-}
-#chip.complete{
-  background  : tomato;
-}
-</style>
+  /*table {
+     border-collapse: collapse;
+     width:100%
+  }*/
+  /*td, th {
+     border :1px solid #dddddd;
+     text-align: left;
+     padding: 10px;
+  }*/
+  .board.done{
+   border-left : 4px solid #3cd1c2;
+  }
+  .board.ongoing{
+   border-left : 4px solid orange;
+  }
+  .board.complete{
+   border-left : 4px solid tomato;
+  }
+  #chip.done{
+   background :  #3cd1c2;
+  }
+  
+  #chip.ongoing{
+   background :  orange;
+  }
+  #chip.processing{
+   background  : tomato;
+  }
+  </style>
+  
