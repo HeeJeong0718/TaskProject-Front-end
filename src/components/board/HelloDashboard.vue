@@ -19,16 +19,6 @@
                <div class="caption grey--text">DUE_DATE</div>
                <div>{{board.DUE_DATE}}</div>
              </v-flex> 
-             <v-flex xs6 sm4 md2>
-              <div class="pa-5">
-              <v-text v-model="readyn3">{{readyn3}}</v-text>
-             <v-btn small text color="grey" @click="readNotice(board.B_ROW)">
-              <v-icon left small>mdi-pencil</v-icon> 
-             <span class="cation text-lowercase">확인</span>
-            </v-btn>
-         
-          </div> 
-          </v-flex> 
           </v-layout>
         </v-card-text>
         <v-btn small text color="grey" @click="doneToggle()">
@@ -102,8 +92,7 @@ export default {
           }
          })
       .then(response =>{
-      this.boards = response.data.list 
-      alert("this.boards" + JSON.stringify(this.boards));
+      this.boards = response.data.list;
       })
       .catch(error =>{
       console.log(error);

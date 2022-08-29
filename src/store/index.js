@@ -9,7 +9,6 @@ export default new Vuex.Store({
   state: {
     //userid로 로그인했을때
     mem_id : '', 
-    token : '',
     loginlevel : '',
     mem_no :''
    
@@ -20,9 +19,6 @@ export default new Vuex.Store({
     },
     isLogin(state){
       return state.mem_id !== ''
-    },
-    getToken(state){
-      return state.token
     },
     getUserId(state){
       return state.mem_id
@@ -40,12 +36,6 @@ export default new Vuex.Store({
       state.mem_no = mem_no;
       console.log("loginlevel" + state.mem_no);
     },
-
-    setUserID2(state, mem_id){
-      state.mem_id =  mem_id
-      sessionStorage.setItem("data",state.mem_id);
-      console.log("session" + sessionStorage.getItem('data'));
-    },
     clearUser(state){ //userid를 초기화 시켜서 로그아웃하게 만든다
       state.mem_id ="";
     },
@@ -59,9 +49,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setUserID2(context,mem_id){
-       context.commit("setUserID2" , mem_id);
-    },
+
     setUserLevel(context,loginlevel){
       context.commit("setUserLevel" , loginlevel);
    },
