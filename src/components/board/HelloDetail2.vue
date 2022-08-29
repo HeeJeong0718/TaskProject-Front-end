@@ -10,7 +10,7 @@
             <v-text-field dense label="B_ROW"v-model="userDetail.B_ROW"/>
         </div>
         <div class="mt-4" align="left">
-          <v-text-field dense label="USERID"v-model="$store.state.mem_id"/>
+          <v-text-field dense label="USERID"v-model="userDetail.B_ID"/>
         </div>
         
         <div class="mt-4" align="left">
@@ -62,8 +62,7 @@
   </v-container>
 </div>
 </template>
-
-
+  
 <script>
   import axios from "axios";
 export default {
@@ -95,16 +94,15 @@ export default {
 	
   mounted(){
            console.log("ID::" + JSON.stringify( this.$route.params.contentId));
-          const B_ROW = this.$route.params.contentId;
-      axios.get('http://localhost:8080/boardDetail',{
+          const B_NO = this.$route.params.contentId;
+      axios.get('http://localhost:8080/boardDetail2',{
           params:{
-             mem_id:this.$store.state.mem_id,
-             mem_no : this.$store.state.mem_no,
-             b_row:B_ROW
+            b_no:B_NO
           }
          })
       .then(response =>{
       this.userDetail = response.data.list 
+      console.log("this.userdetail" + JSON.stringify(this.userDetail));
       })
       .catch(error =>{
       console.log(error);

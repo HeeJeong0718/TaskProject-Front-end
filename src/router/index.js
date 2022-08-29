@@ -4,6 +4,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HelloList from "../components/board/HelloList.vue";
 import HelloDetail from "../components/board/HelloDetail.vue";
+import HelloDetail2 from "../components/board/HelloDetail2.vue";
 import HelloEdit from "../components/board/HelloEdit.vue";
 import HelloRegister from "../components/board/HelloRegister.vue";
 import HelloLogin from "../components/board/HelloLogin.vue";
@@ -96,6 +97,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component:HelloDetail
+  },
+  {
+    path: "/board/detail2/:contentId" ,
+    name: "detail2",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component:HelloDetail2
   },
   {
     path: "/board/dashboard" ,

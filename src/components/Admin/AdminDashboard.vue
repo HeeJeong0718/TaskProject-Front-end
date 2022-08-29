@@ -105,19 +105,7 @@
          }
          
                   
-         /*
-         fnView:function(ID){
-          alert("id" + ID);
-          this.$router.push(`detail/${ID}`);
-         this.$router.push({ 
-              name:'detail',
-              params : { contentId :ID}
-              });
-          /*this.$router.push({
-              name:'detail',
-              params : { contentId :i}
-              }); //상세페이지 이동*/
-             
+    
         
         
        }
@@ -125,15 +113,7 @@
     
     </script> 
     <style scoped>
-      /*table {
-         border-collapse: collapse;
-         width:100%
-      }*/
-      /*td, th {
-         border :1px solid #dddddd;
-         text-align: left;
-         padding: 10px;
-      }*/
+     
       .board.done{
        border-left : 4px solid #3cd1c2;
       }
